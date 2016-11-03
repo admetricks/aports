@@ -1,0 +1,33 @@
+From 1d033d3036c1eb9a5706410f2b25ae4cd00c834e Mon Sep 17 00:00:00 2001
+From: Juan Pizarro <jpizarrom@gmail.com>
+Date: Thu, 3 Nov 2016 14:58:21 -0300
+Subject: [PATCH] ssl bump
+
+---
+ src/FwdState.cc | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/FwdState.cc b/src/FwdState.cc
+index e25f3d4..df19486 100644
+--- a/src/FwdState.cc
++++ b/src/FwdState.cc
+@@ -782,6 +782,8 @@ FwdState::connectStart()
+ 
+     request->hier.startPeerClock();
+ 
++    // Commented out to use peer with sslbumping, in spite of transfering ssl encapsulated data clearly
++    /*
+     if (serverDestinations[0]->getPeer() && request->flags.sslBumped) {
+         debugs(50, 4, "fwdConnectStart: Ssl bumped connections through parent proxy are not allowed");
+         ErrorState *anErr = new ErrorState(ERR_CANNOT_FORWARD, Http::scServiceUnavailable, request);
+@@ -789,6 +791,7 @@ FwdState::connectStart()
+         self = NULL; // refcounted
+         return;
+     }
++    */
+ 
+     request->flags.pinned = false; // XXX: what if the ConnStateData set this to flag existing credentials?
+     // XXX: answer: the peer selection *should* catch it and give us only the pinned peer. so we reverse the =0 step below.
+-- 
+2.5.4 (Apple Git-61)
+
